@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+</head>
+<body>
+<div>
+  <textarea id="text"></textarea>
+</div>
+<div id="control" class="clear">
+  <div id="translate">
+    <input type="button" id="translateEnglish" class="left" value="英語" /><input type="button" id="translateJapanese" class="right" value="日本語" />
+  </div>
+  <div id="speak">
+    <input type="button" id="speakEnglish" class="both" value="" />
+  </div>
+  <div id="dictionary">
+    <input type="button" id="EJDictionary" class="left" value="英和辞書" /><input type="button" id="JEDictionary" class="right" value="和英辞書" />
+  </div>
+  <div id="loader"><img src="img/loader.gif" alt="loader"></div>
+</div>
+<div>
+  <textarea id="result" readonly="readonly" tabindex="-1"></textarea>
+</div>
+<div id="error"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/honyaku.js"></script>
+</body>
+</html>
