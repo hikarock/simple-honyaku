@@ -2,7 +2,7 @@
   "name": "シンプル翻訳",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "英和/和英の翻訳機能と辞書、英語読み上げ機能がついたシンプルな翻訳アプリです。",
+  "description": "英和/和英の翻訳機能と辞書、英語読み上げ機能がついたシンプルなデザインの翻訳アプリです。",
   "icons": {
     "16": "img/icon16.png",
     "32": "img/icon32.png",
