@@ -29,14 +29,14 @@ function loadLocalStorage() {
 }
 
 function showError(message) {
-  $("#error").text(message).show('slow').fadeOut();
+  $("#error").empty().text(message).show().fadeOut(2000);
 }
 
 /*
  * Constants
  */
-var DEBUG = true,
-    ERROR_EMPTY = "入力が空です。",
+var DEBUG = false,
+    ERROR_EMPTY = "テキストを入力してください。",
     ERROR_NOT_FOUND = "は見つかりませんでした。",
     ERROR_SERVER = "サーバーから応答がありません。",
     BING_APP_ID = "6DB16C8155FF50AB1445D8A057BFC6F90840F26A",
@@ -49,7 +49,7 @@ $(function () {
 
   $("#translateEnglish").focus();
 
-  var translate, speak,
+  var translate, speak, dejizo,
   bg = chrome.extension.getBackgroundPage();
   bg.getSelectedText(function (selectedText) {
     if (selectedText !== null && selectedText !== "") {
@@ -61,7 +61,6 @@ $(function () {
 
   translate = function (fromLang, toLang) {
 
-    $("#error").empty();
     $("#loader").show();
 
     if ($("#text").val() !== "") {
@@ -78,27 +77,25 @@ $(function () {
         url: MICROSOFT_TRANSLATOR_URL + "Translate",
         data: params,
         success: function (result) {
+          result = result.replace(/^"/, '').replace(/"$/, '');
           $("#loader").hide();
-          DEBUG && alert("result: " + result);
           $("#result").val(result);
           saveLocalStorage(result);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
           $("#loader").hide();
-          DEBUG && alert("SearchDicItemLite: " + textStatus + " - " + errorThrown);
-          showError("ERROR_SERVER");
+          showError(ERROR_SERVER);
         }
       });
 
     } else {
       $("#loader").hide();
-      $("#error").text(ERROR_EMPTY);
+      showError(ERROR_EMPTY);
     }
   };
 
   speak = function () {
 
-    $("#error").empty();
     $("#loader").show();
 
     if ($("#text").val() !== "") {
@@ -114,19 +111,20 @@ $(function () {
         url: MICROSOFT_TRANSLATOR_URL + "Speak",
         data: params,
         success: function (result) {
+          result = result.replace(/^"/, '').replace(/"$/, '');
           $("#loader").hide();
-          DEBUG && alert("result: " + result);
+          $("iframe").remove();
           $("body").append($("<iframe>").attr("src", result).hide());
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
           $("#loader").hide();
-          DEBUG && alert("SearchDicItemLite: " + textStatus + " - " + errorThrown);
-          $("#error").text("ERROR_SERVER");
+          showError(ERROR_SERVER);
         }
       });
 
     } else {
-      $("#error").text(ERROR_EMPTY);
+      $("#loader").hide();
+      showError(ERROR_EMPTY);
     }
   };
 
@@ -140,13 +138,12 @@ $(function () {
     speak();
   });
 
-  var dejizo = function (dic) {
+  dejizo = function (dic) {
 
     var DEJIZO_SEARCH_URL = "http://public.dejizo.jp/NetDicV09.asmx/SearchDicItemLite",
       DEJIZO_GET_URL = "http://public.dejizo.jp/NetDicV09.asmx/GetDicItemLite",
       word, params;
 
-    $("#error").empty();
     if ($("#text").val() !== "") {
       word = $("#text").val();
       params = {
@@ -159,6 +156,7 @@ $(function () {
         "PageSize": "4",
         "PageIndex": "0"
       };
+
       $.ajax({
         type: "GET",
         url: DEJIZO_SEARCH_URL,
@@ -195,24 +193,23 @@ $(function () {
                   saveLocalStorage($("#result").val());
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                  DEBUG && alert("GetDicItemLite: " + textStatus + " - " + errorThrown);
-                  $("#error").text("ERROR_SERVER");
+                  showError(ERROR_SERVER);
                 }
               });
             });
           } else {
-            $("#error").text(
-              "[" + (word.length > 10 ? word.slice(0, 10) + "..." : word) + "]" + ERROR_NOT_FOUND
+            showError(
+              '"' + (word.length > 10 ? word.slice(0, 10) + "..." : word) + '" ' +
+              ERROR_NOT_FOUND
             );
           }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-          DEBUG && alert("SearchDicItemLite: " + textStatus + " - " + errorThrown);
-          $("#error").text("ERROR_SERVER");
+          showError(ERROR_SERVER);
         }
       });
     } else {
-      $("#error").text(ERROR_EMPTY);
+      showError(ERROR_EMPTY);
     }
   };
   $("#EJDictionary").click(function () {
@@ -233,4 +230,5 @@ $(function () {
       $("#JEDictionary").click();
     }
   });
+
 });

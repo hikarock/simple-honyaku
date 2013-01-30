@@ -45,12 +45,12 @@ textarea {
   display: none;
   z-index: 9999;
   position: absolute;
-  top: 50%;
+  top: 100px;
   left: 50%;
-  margin: -50px 0 0 -150px;
-  height: 100px;
+  margin: -9px 0 0 -170px;
+  height: 18px;
   padding: 10px;
-  width: 300px;
+  width: 340px;
   border-radius: 5px;
   background-color: #f8d6d4;
   border: 1px solid #e1483e;
