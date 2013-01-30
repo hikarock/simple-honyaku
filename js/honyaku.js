@@ -24,7 +24,7 @@ function loadLocalStorage() {
     $("#text").val(localStorage.translationText);
   }
   if (localStorage.translationResult) {
-    $("#result").val(localStorage.translationResult);
+    $("#result").text(localStorage.translationResult);
   }
 }
 
@@ -65,11 +65,13 @@ $(function () {
 
     if ($("#text").val() !== "") {
 
+      var text = $("#text").val();
+
       var params = {
         "appId": BING_APP_ID,
         "from": fromLang,
         "to": toLang,
-        "text": $("#text").val()
+        "text": text
       };
 
       $.ajax({
@@ -79,7 +81,7 @@ $(function () {
         success: function (result) {
           result = result.replace(/^"/, '').replace(/"$/, '');
           $("#loader").hide();
-          $("#result").val(result);
+          $("#result").text(result);
           saveLocalStorage(result);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -102,7 +104,7 @@ $(function () {
 
       var params = {
         "appId": BING_APP_ID,
-        "text": $("#result").val(),
+        "text": $("#result").text(),
         "language": "en"
       };
 
@@ -163,7 +165,7 @@ $(function () {
         data: params,
         success: function (xml) {
           if ($(xml).find("ItemID").length !== 0) {
-            $("#result").val("");
+            $("#result").text("");
             $(xml).find("ItemID").each(function () {
               var itemId = $(this).text(), params;
               params = {
@@ -189,8 +191,8 @@ $(function () {
                                .trim()
                                .replace(/\s{2,}/g, " ")
                                .replace(/\t{2,}/g, "\n");
-                  $("#result").val($("#result").val() + head + "\n" + body + "\n");
-                  saveLocalStorage($("#result").val());
+                  $("#result").text($("#result").text() + head + "\n" + body + "\n");
+                  saveLocalStorage($("#result").text());
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                   showError(ERROR_SERVER);
