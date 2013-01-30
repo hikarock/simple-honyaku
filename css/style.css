@@ -42,10 +42,21 @@ textarea {
   float: left;
 }
 #error {
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -150px;
+  height: 100px;
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f8d6d4;
+  border: 1px solid #e1483e;
+  opacity: 0.8;
   color: #c50067;
   font-size: 11px;
-  margin-top: 5px;
-  height: 20px;
   text-align: center;
 }
 #control #speak {
