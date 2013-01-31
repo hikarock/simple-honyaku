@@ -78,6 +78,7 @@ $(function () {
         type: "GET",
         url: MICROSOFT_TRANSLATOR_URL + "Translate",
         data: params,
+        timeout: 20000,
         success: function (result) {
           result = result.replace(/^"/, '').replace(/"$/, '');
           $("#loader").hide();
@@ -112,6 +113,7 @@ $(function () {
         type: "GET",
         url: MICROSOFT_TRANSLATOR_URL + "Speak",
         data: params,
+        timeout: 20000,
         success: function (result) {
           result = result.replace(/^"/, '').replace(/"$/, '');
           $("#loader").hide();
@@ -163,6 +165,7 @@ $(function () {
         type: "GET",
         url: DEJIZO_SEARCH_URL,
         data: params,
+        timeout: 20000,
         success: function (xml) {
           if ($(xml).find("ItemID").length !== 0) {
             $("#result").text("");
@@ -178,6 +181,7 @@ $(function () {
                 type: "GET",
                 url: DEJIZO_GET_URL,
                 data: params,
+                timeout: 20000,
                 success: function (xml) {
                   var head, body;
                   head = $(xml).find(".NetDicHeadTitle")
