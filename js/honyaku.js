@@ -15,7 +15,6 @@ String.prototype.unescapeUnicode = function (str) {
   return str.replace(/\\u([a-fA-F0-9]{4})/g, function(matchedString, group1) {
     return String.fromCharCode(parseInt(group1, 16));
   });
-
 };
 
 /*
