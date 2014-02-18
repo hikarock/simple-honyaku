@@ -11,6 +11,12 @@ String.prototype.toHankaku = function () {
   });
 };
 
+String.prototype.unescapeUnicode = function (str) {
+  return str.replace(/\\u([a-fA-F0-9]{4})/g, function(matchedString, group1) {
+    return String.fromCharCode(parseInt(group1, 16));
+  });
+};
+
 /*
  * Storage
  */
@@ -80,7 +86,10 @@ $(function () {
         data: params,
         timeout: 20000,
         success: function (result) {
-          result = result.replace(/^"/, '').replace(/"$/, '');
+          result = result.unescapeUnicode(result)
+                         .replace(/^"/, '')
+                         .replace(/"$/, '')
+                         .replace(/\\"/g, '"');
           $("#loader").hide();
           $("#result").text(result);
           saveLocalStorage(result);
