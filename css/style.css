@@ -34,6 +34,7 @@ textarea {
   border-radius: 5px;
   background: -webkit-gradient(linear, left top, left bottom, from(#fcffd6), to(#e8db8e));
   color: #493a33;
+  overflow-y: scroll;
 }
 #control {
   padding: 5px 0 12px 0;
