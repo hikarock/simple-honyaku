@@ -1,0 +1,73 @@
+h1, p, label, input {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1em;
+  font-size: 14px;
+  color: #333;
+}
+
+h1 {
+  color: #00b7ea;
+}
+a:link, a:visited {
+  color: #108abc;
+}
+a:hover {
+  color: #00b7ea;
+}
+
+input[type='text'] {
+  padding: 4px;
+  border: 1px solid #999;
+}
+input[type='button'] {
+  margin-bottom: 0;
+  border-radius: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weigt: bold;
+  background-color: #00b7ea;
+  padding: 3px 6px 3px 6px;
+  border: 0;
+  margin-right: 0.5em;
+}
+input[type='button']:hover {
+  color: #eee;
+}
+input[type='text']:focus {
+  background-color: #eee;
+}
+input:focus {
+  outline: none;
+}
+
+#default {
+  background-color: #999;
+}
+
+body {
+  background-color: #fff;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+#main {
+  max-width: 650px;
+  margin: 30px 20px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  background-color: #eee;
+}
+
+#bing-app-id {
+  width: 400px;
+}
+
+#message {
+  font-size: 14px;
+  color: #108abc;
+}
