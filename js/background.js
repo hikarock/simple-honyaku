@@ -12,7 +12,7 @@ function getSelectedText(callback) {
       callback(null);
     }
   });
-};
+}
 
 chrome.extension.onRequest.addListener(function(request) {
   var callback = callbacks.shift();

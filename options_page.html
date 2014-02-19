@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>シンプル翻訳</title>
+<link rel="stylesheet" href="css/options_page.css">
+</head>
+<body>
+<div id="main">
+  <h1>シンプル翻訳のオプション</h1>
+  <p>
+    翻訳が正常に動作しない場合 Bing Translator API が利用制限されている可能性があります。<br>
+    あなたが取得した <a href="https://www.bing.com/developers/appids.aspx" target="_blank">Bing Application ID</a> を設定すると、問題が解決するかもしれません。
+  </p>
+  <div id="option">
+    <div>
+      <input type="text" id="bing-app-id" placeholder="Bing Application ID">
+    </div>
+    <div>
+      <input type="button" id="save" value="保存">
+      <input type="button" id="default" value="デフォルト設定に戻して保存">
+      <span id="message"></span>
+    </div>
+  </div>
+</div>
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/options_page.js"></script>
+</body>
+</html>
